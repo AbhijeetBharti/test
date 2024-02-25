@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:weather_test/constants/url.dart';
@@ -20,7 +22,8 @@ class NetworkServices {
             statusCode: response.statusCode);
       } else {
         throw ApiError(
-            errorMessage: response.body.toString(),
+            errorMessage:
+                jsonDecode(response.body.toString())["message"].toString(),
             statusCode: response.statusCode);
       }
     } catch (e) {
@@ -39,7 +42,8 @@ class NetworkServices {
             statusCode: response.statusCode);
       } else {
         throw ApiError(
-            errorMessage: response.body.toString(),
+            errorMessage:
+                jsonDecode(response.body.toString())["message"].toString(),
             statusCode: response.statusCode);
       }
     } catch (e) {
